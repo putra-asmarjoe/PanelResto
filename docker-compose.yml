@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: vBxCghtvQ9
+      MYSQL_DATABASE: panelresto
+      MYSQL_USER: resto
+      MYSQL_PASSWORD: pBxCghk9e0
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: node_app
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: resto
+      DB_PASSWORD: pBxCghk9e0
+      DB_NAME: panelresto
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

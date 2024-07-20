@@ -203,8 +203,8 @@ router.get('/export/excel', async (req, res) => {
                 stock: product.stock,
                 category: product.category.name,
                 imageUrl: product.imageUrl,
-                createdAt: product.createdAt,
-                updatedAt: product.updatedAt
+                createdAt: new Date(product.created_at).toISOString(), 
+                updatedAt: new Date(product.updated_at).toISOString(), 
             });
         });
  
