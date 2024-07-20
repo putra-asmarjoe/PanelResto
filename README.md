@@ -66,7 +66,7 @@ npm start
 ## Access the Application
 ```
 Product List: http://localhost:3000/
-Score List: http://localhost:3000/score
+Score List: http://localhost:3000/scores
 ```
 
 
