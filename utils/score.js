@@ -1,6 +1,5 @@
-const { fn, col, literal } = require('sequelize');
-const Score = require('../models/Score'); // Adjust the path to your model
-
+const { fn, col, literal} = require('sequelize');
+const Score = require('../models/Score');
 const sampleScores = [
     { name: 'Kevin', score: 80, emotion: 'Happy', created: '2020-02-20' },
     { name: 'Josh', score: 90, emotion: 'Sad', created: '2020-02-20' },
@@ -30,26 +29,34 @@ const insertSampleData = async () => {
 
 const getAverageScoreAndModeEmotion = async () => {
     try {
-        const results = await Score.findAll({
+      
+        results = await Score.findAll({
             attributes: [
                 'name',
                 'created',
                 [fn('AVG', col('score')), 'average_score'],
                 [literal(`(
                     SELECT emotion
-                    FROM (
-                        SELECT emotion, COUNT(*) AS frequency
-                        FROM Scores
-                        WHERE name = Scores.name AND created = Scores.created
-                        GROUP BY emotion
-                        ORDER BY frequency DESC
-                        LIMIT 1
-                    ) AS mode_emotion
-                )`), 'mode_emotion']
+                    FROM Scores AS innerScores
+                    WHERE innerScores.name = Score.name AND innerScores.created = Score.created
+                    GROUP BY emotion
+                    ORDER BY COUNT(*) DESC, emotion ASC
+                    LIMIT 1
+                )`), 'modus_emotion'],
+                [literal(`(
+                    SELECT COUNT(*)
+                    FROM Scores AS innerScores
+                    WHERE innerScores.name = Score.name AND innerScores.created = Score.created
+                    GROUP BY emotion
+                    ORDER BY COUNT(*) DESC, emotion ASC
+                    LIMIT 1
+                )`), 'frequency']
             ],
             group: ['name', 'created'],
+            order: [['name', 'ASC'], ['created', 'ASC']],
             raw: true
         });
+
         
         return results;
     } catch (error) {

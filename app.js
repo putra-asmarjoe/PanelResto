@@ -153,7 +153,9 @@ sequelize.authenticate()
                     frequency
                 }));
                 
+                
                 const avgScorenEmotion = await getAverageScoreAndModeEmotion();
+                console.log("--------------------------------")
                 console.log(avgScorenEmotion)
                 
                 
