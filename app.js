@@ -15,10 +15,6 @@ const productRoutes = require('./routes/router');
 const port = 3000;
 
 
-require('dotenv').config();
-console.log(process.env);
-
-
 // Setup Mustache sebagai template engine
 app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
