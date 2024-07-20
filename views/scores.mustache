@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Score List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Score List</h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                            <th>Emotion</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#scores}}
+                        <tr>
+                            <td>{{id}}</td>
+                            <td>{{name}}</td>
+                            <td>{{score}}</td>
+                            <td>{{emotion}}</td>
+                            <td>{{created}}</td>
+                        </tr>
+                        {{/scores}}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-4">
+                    <h3>Average Scores by Name</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Average Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#averageScores}}
+                            <tr>
+                                <td>{{name}}</td>
+                                <td>{{average_score}}</td>
+                            </tr>
+                            {{/averageScores}}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mb-4">
+                    <h3>Modus Emotion per Name</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Mode Emotion</th>
+                                <th>Frequency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#modeScores}}
+                            <tr>
+                                <td>{{name}}</td>
+                                <td>{{mode_emotion}}</td>
+                                <td>{{frequency}}</td>
+                            </tr>
+                            {{/modeScores}}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <h3>Average Scores and Mode Emotion</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Average Score</th>
+                                <th>Mode Emotion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#avgScorenEmotion}}
+                            <tr>
+                                <td>{{name}}</td>
+                                <td>{{created}}</td>
+                                <td>{{average_score}}</td>
+                                <td>{{mode_emotion}}</td>
+                            </tr>
+                            {{/avgScorenEmotion}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
